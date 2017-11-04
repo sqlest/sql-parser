@@ -39,3 +39,7 @@ hs_err_pid*
 
 #pmd
 .pmd
+
+#antlr
+src/main/java/*.tokens
+src/main/java/**/parser/sql/oracle/**
