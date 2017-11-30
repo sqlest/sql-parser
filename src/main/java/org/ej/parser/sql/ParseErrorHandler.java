@@ -18,7 +18,7 @@
 
 package org.ej.parser.sql;
 
-import org.ej.parser.sql.exception.ParseException;
+import org.ej.parser.sql.listener.ParseException;
 
 /**
  * ParseErrorHandler

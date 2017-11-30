@@ -18,16 +18,14 @@
 
 package org.ej.parser.sql;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
-import org.ej.common.util.FileUtils;
-import org.ej.parser.sql.SqlParser;
-import org.ej.parser.sql.SqlParserFactory;
-import org.ej.parser.sql.SqlType;
-import org.ej.parser.sql.exception.ParseException;
+import org.ej.parser.sql.listener.ParseException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -60,7 +58,12 @@ public class SqlParserFactoryTest {
 	public void test() {
 		LOGGER.debug("FilePath:{}", this.sqlFile.getAbsolutePath());
 
-		String fileString = FileUtils.readFile(this.sqlFile);
+		String fileString = "";
+		try {
+			fileString = FileUtils.readFile(this.sqlFile);
+		} catch (IOException e) {
+			assertFalse(e.getMessage(), true);
+		}
 
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);

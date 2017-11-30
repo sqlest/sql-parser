@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2017 ej.park 
- * 
+ * Copyright (c) 2017 ej.park
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,7 +16,7 @@
  *
  */
 
-package org.ej.common.util;
+package org.ej.parser.sql;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,13 +26,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ej.common.SystemException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * FileUtils
- * 
+ *
  * @author ej.park
  *
  */
@@ -42,7 +41,7 @@ public class FileUtils {
 
 	/**
 	 * getFileList
-	 * 
+	 *
 	 * @param filePath
 	 *            file path
 	 * @return List file list
@@ -61,7 +60,7 @@ public class FileUtils {
 
 	/**
 	 * getFile
-	 * 
+	 *
 	 * @param filePath
 	 *            file path
 	 * @return File the file
@@ -72,7 +71,7 @@ public class FileUtils {
 
 	/**
 	 * listFiles
-	 * 
+	 *
 	 * @param fileList
 	 *            file list
 	 * @param directory
@@ -91,12 +90,13 @@ public class FileUtils {
 
 	/**
 	 * readFile
-	 * 
+	 *
 	 * @param file
 	 *            file
 	 * @return String file string
+	 * @throws IOException
 	 */
-	public static String readFile(File file) {
+	public static String readFile(File file) throws IOException {
 		StringBuilder sb = new StringBuilder();
 		BufferedReader reader = null;
 		try {
@@ -108,8 +108,6 @@ public class FileUtils {
 				line = reader.readLine();
 			}
 			reader.close();
-		} catch (IOException ioe) {
-			throw new SystemException(ioe);
 		} finally {
 			try {
 				if (reader != null) {

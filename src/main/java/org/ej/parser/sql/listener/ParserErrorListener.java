@@ -21,7 +21,6 @@ package org.ej.parser.sql.listener;
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
-import org.ej.parser.sql.exception.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

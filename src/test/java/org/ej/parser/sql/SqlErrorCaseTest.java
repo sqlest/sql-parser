@@ -18,16 +18,13 @@
 
 package org.ej.parser.sql;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.ej.common.util.FileUtils;
-import org.ej.parser.sql.ParseErrorHandler;
-import org.ej.parser.sql.SqlParser;
-import org.ej.parser.sql.SqlParserFactory;
-import org.ej.parser.sql.SqlType;
-import org.ej.parser.sql.exception.ParseException;
+import org.ej.parser.sql.listener.ParseException;
 import org.junit.Test;
 
 /**
@@ -41,7 +38,7 @@ public class SqlErrorCaseTest {
 	@Test
 	public void testLexerError() {
 		File sqlFile = FileUtils.getFile("src/test/resources/org/ej/parser/sql/error/lexererrorsql.sql");
-		String fileString = FileUtils.readFile(sqlFile);
+		String fileString = getFileString(sqlFile);
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);
 		for (String sql : sqls) {
@@ -59,7 +56,7 @@ public class SqlErrorCaseTest {
 	@Test
 	public void testLexerErrorWithHandler() {
 		File sqlFile = FileUtils.getFile("src/test/resources/org/ej/parser/sql/error/lexererrorsql.sql");
-		String fileString = FileUtils.readFile(sqlFile);
+		String fileString = getFileString(sqlFile);
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);
 		for (String sql : sqls) {
@@ -88,7 +85,7 @@ public class SqlErrorCaseTest {
 	@Test
 	public void testParserError() {
 		File sqlFile = FileUtils.getFile("src/test/resources/org/ej/parser/sql/error/parsererrorsql.sql");
-		String fileString = FileUtils.readFile(sqlFile);
+		String fileString = getFileString(sqlFile);
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);
 		for (String sql : sqls) {
@@ -106,7 +103,7 @@ public class SqlErrorCaseTest {
 	@Test
 	public void testParserErrorWithHandler() {
 		File sqlFile = FileUtils.getFile("src/test/resources/org/ej/parser/sql/error/parsererrorsql.sql");
-		String fileString = FileUtils.readFile(sqlFile);
+		String fileString = getFileString(sqlFile);
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);
 		for (String sql : sqls) {
@@ -130,5 +127,15 @@ public class SqlErrorCaseTest {
 				assertTrue(false);
 			}
 		}
+	}
+
+	private String getFileString(File sqlFile) {
+		String fileString = "";
+		try {
+			fileString = FileUtils.readFile(sqlFile);
+		} catch (IOException e) {
+			assertFalse(e.getMessage(), true);
+		}
+		return fileString;
 	}
 }

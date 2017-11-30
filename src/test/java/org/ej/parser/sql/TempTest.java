@@ -18,9 +18,11 @@
 
 package org.ej.parser.sql;
 
-import java.io.File;
+import static org.junit.Assert.assertFalse;
 
-import org.ej.common.util.FileUtils;
+import java.io.File;
+import java.io.IOException;
+
 import org.junit.Test;
 
 /**
@@ -34,7 +36,13 @@ public class TempTest {
 	@Test
 	public void testLexerError() {
 		File sqlFile = FileUtils.getFile("src/test/resources/org/ej/parser/sql/temp.sql");
-		String fileString = FileUtils.readFile(sqlFile);
+		String fileString = "";
+		try {
+			fileString = FileUtils.readFile(sqlFile);
+		} catch (IOException e) {
+			assertFalse(e.getMessage(), true);
+		}
+
 		String[] sqls = fileString.split(";");
 		SqlParser sqlParser = SqlParserFactory.getSqlParser(SqlType.ORACLE);
 		for (String sql : sqls) {

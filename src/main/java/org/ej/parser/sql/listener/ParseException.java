@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2017 ej.park 
- * 
+ * Copyright (c) 2017 ej.park
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -16,28 +16,30 @@
  *
  */
 
-package org.ej.common;
+package org.ej.parser.sql.listener;
 
 /**
- * SystemException
- * 
+ * ParseException
+ *
  * @author ej.park
  *
  */
-public class SystemException extends AbstractCommonException {
+public class ParseException extends RuntimeException {
 
 	/**
 	 * serialVersionUID
 	 */
-	private static final long serialVersionUID = 4563668600804161020L;
+	private static final long serialVersionUID = -512743202948567646L;
 
 	/**
 	 * constructor
-	 * 
+	 *
+	 * @param message
+	 *            exception message
 	 * @param cause
 	 *            the cause
 	 */
-	public SystemException(Throwable cause) {
-		super(cause);
+	public ParseException(String message, Throwable cause) {
+		super(message, cause);
 	}
 }
